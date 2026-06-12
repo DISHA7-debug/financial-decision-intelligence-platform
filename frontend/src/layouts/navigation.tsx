@@ -20,15 +20,15 @@ export function Navigation() {
 
   return (
     <nav className="border-b border-border/6 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-12 md:px-16">
-        <div className="flex items-center justify-between h-[80px]">
-          <Link href="/" className="flex items-center gap-5">
+      <div className="max-w-7xl mx-auto px-14 md:px-20">
+        <div className="flex items-center justify-between h-[68px]">
+          <Link href="/" className="flex items-center gap-4">
             <motion.div 
-              className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-accent to-gold-accent/60 flex items-center justify-center"
+              className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-accent to-gold-accent/60 flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Activity className="w-6 h-6 text-background" />
+              <Activity className="w-5 h-5 text-background" />
             </motion.div>
             <span className="text-[18px] md:text-[20px] font-semibold text-primary-text">
               Decision Intelligence
@@ -36,7 +36,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-5">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href
@@ -48,7 +48,7 @@ export function Navigation() {
                 >
                   <motion.div
                     className={cn(
-                      "flex items-center gap-3 px-7 py-3 rounded-xl text-[16px] font-medium transition-all duration-200",
+                      "flex items-center gap-3 px-[20px] py-[12px] rounded-xl text-[16px] font-medium transition-all duration-200",
                       isActive
                         ? "bg-gold-accent/10 text-gold-accent border border-gold-accent/20"
                         : "text-secondary-text hover:text-primary-text hover:bg-surface/50"
@@ -57,7 +57,7 @@ export function Navigation() {
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4" />
                     {item.label}
                   </motion.div>
                 </Link>
@@ -66,7 +66,7 @@ export function Navigation() {
           </div>
 
           {/* Desktop Status */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6 pr-6">
             <motion.div 
               className="w-3 h-3 rounded-full bg-success"
               animate={{ opacity: [1, 0.5, 1] }}
@@ -81,9 +81,9 @@ export function Navigation() {
             className="md:hidden p-3 rounded-lg hover:bg-surface/50 transition-colors"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-primary-text" />
+              <X className="w-5 h-5 text-primary-text" />
             ) : (
-              <Menu className="w-6 h-6 text-primary-text" />
+              <Menu className="w-5 h-5 text-primary-text" />
             )}
           </button>
         </div>
@@ -99,7 +99,7 @@ export function Navigation() {
             transition={{ duration: 0.2 }}
             className="md:hidden border-t border-border/6 bg-card/50"
           >
-            <div className="px-4 py-6 space-y-3">
+            <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => {
                 const Icon = item.icon
                 const isActive = pathname === item.href
@@ -112,21 +112,21 @@ export function Navigation() {
                   >
                     <motion.div
                       className={cn(
-                        "flex items-center gap-4 px-5 py-4 rounded-xl text-[18px] font-medium transition-all duration-200",
-                        isActive
-                          ? "bg-gold-accent/10 text-gold-accent border border-gold-accent/20"
-                          : "text-secondary-text hover:text-primary-text hover:bg-surface/50"
-                      )}
+                          "flex items-center gap-4 px-[20px] py-[12px] rounded-xl text-[18px] font-medium transition-all duration-200",
+                          isActive
+                            ? "bg-gold-accent/10 text-gold-accent border border-gold-accent/20"
+                            : "text-secondary-text hover:text-primary-text hover:bg-surface/50"
+                        )}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-5 h-5" />
                       {item.label}
                     </motion.div>
                   </Link>
                 )
               })}
               
-              <div className="flex items-center gap-3 px-5 py-4 mt-6 border-t border-border/6">
+              <div className="flex items-center gap-4 px-[20px] py-[12px] mt-6 border-t border-border/6">
                 <motion.div 
                   className="w-3 h-3 rounded-full bg-success"
                   animate={{ opacity: [1, 0.5, 1] }}

@@ -139,7 +139,6 @@
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
 }
 
@@ -152,6 +151,7 @@ body {
 body {
   color: var(--primary-text);
   font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: var(--leading-relaxed);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

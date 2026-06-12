@@ -25,30 +25,35 @@ export default function AnalyzePage() {
     if (!companyName) return
     setLoading(true)
     setError(null)
-    setData(null)
 
     try {
       const result = await analyzeCompany(companyName)
       setData(result)
-      
+
       const stored = localStorage.getItem('recent_searches')
       let recents: any[] = []
       if (stored) {
-        try { recents = JSON.parse(stored) } catch(e) {}
+        try {
+          recents = JSON.parse(stored)
+        } catch (e) {
+          recents = []
+        }
       }
+
       const updated = [
-        { 
-          company: result.company, 
-          recommendation: result.recommendation, 
-          altmanZ: result.altman_z, 
-          piotroskiF: result.piotroski_f, 
-          riskClassification: result.risk_classification || 'Completed' 
+        {
+          company: result.company,
+          recommendation: result.recommendation,
+          altmanZ: result.altman_z,
+          piotroskiF: result.piotroski_f,
+          riskClassification: result.risk_classification || 'Completed',
         },
-        ...recents.filter(c => c.company.toUpperCase() !== result.company.toUpperCase())
+        ...recents.filter((c) => c.company.toUpperCase() !== result.company.toUpperCase()),
       ].slice(0, 4)
+
       localStorage.setItem('recent_searches', JSON.stringify(updated))
     } catch (err: any) {
-      const detail = err.response?.data?.detail || err.message || 'Workflow execution failed.'
+      const detail = err?.response?.data?.detail || err?.message || 'Workflow execution failed.'
       setError(detail)
     } finally {
       setLoading(false)
@@ -71,27 +76,27 @@ export default function AnalyzePage() {
   const activeRec = data?.recommendation?.toUpperCase() || ''
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-8">
       {/* Search Header */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-8 pb-12 border-b border-border/6">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-8 border-b border-border/6">
         <div className="flex items-center gap-5">
           <Link
             href="/"
-            className="p-4 rounded-xl bg-surface hover:bg-gold-accent/10 hover:text-gold-accent text-secondary-text border border-border/6 transition-all"
+            className="p-5 rounded-xl bg-surface hover:bg-gold-accent/10 hover:text-gold-accent text-secondary-text border border-border/6 transition-all"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <h1 className="text-[42px] font-bold text-primary-text tracking-tight leading-tight">
+            <h1 className="text-[36px] font-bold text-primary-text tracking-tight leading-tight">
               {data ? `${data.company} Research Workstation` : "Single Asset Analysis"}
             </h1>
-            <span className="text-[16px] text-secondary-text mt-5 block">
+            <span className="text-[16px] text-secondary-text mt-4 block">
               {data ? "SEC filings audited and computed" : "Enter equity ticker for dynamically compiled data"}
             </span>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex gap-6 min-w-[450px]">
+        <form onSubmit={handleSubmit} className="flex gap-4 min-w-[420px]">
           <Input
             type="text"
             placeholder="Search company (e.g. AAPL)..."
@@ -101,7 +106,7 @@ export default function AnalyzePage() {
           />
           <button
             type="submit"
-            className="h-[52px] px-10 bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-colors flex items-center gap-2 text-[16px]"
+            className="h-[44px] px-6 bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-colors flex items-center gap-2 text-[16px]"
           >
             <Search className="w-5 h-5" />
             Analyze
@@ -115,7 +120,7 @@ export default function AnalyzePage() {
       {/* Error state */}
       {error && (
         <Card className="bg-surface">
-          <CardContent className="p-8 flex items-start gap-6">
+          <CardContent className="px-4 py-3 flex items-start gap-4">
             <AlertTriangle className="w-8 h-8 text-danger shrink-0 mt-1" />
             <div>
               <h3 className="text-[18px] font-semibold text-danger mb-2">
@@ -134,8 +139,8 @@ export default function AnalyzePage() {
 
       {/* Initial empty state */}
       {!loading && !error && !data && (
-        <Card className="bg-surface">
-          <CardContent className="p-20 flex flex-col items-center justify-center text-center min-h-[400px]">
+          <Card className="bg-surface">
+          <CardContent className="px-4 py-3 flex flex-col items-center justify-center text-center min-h-[360px]">
             <BarChart2 className="w-16 h-16 text-muted-text mb-6" />
             <h3 className="text-[28px] font-semibold text-primary-text mb-4">
               No security selected
@@ -149,12 +154,12 @@ export default function AnalyzePage() {
 
       {/* Workstation layout grid */}
       {!loading && !error && data && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Left Column: Company Summary */}
-          <div className="lg:col-span-3 flex flex-col gap-12">
+          <div className="lg:col-span-3 flex flex-col gap-8">
             <Card>
-              <CardContent className="p-10">
+              <CardContent className="px-4 py-3">
                 <span className="text-[14px] text-muted-text uppercase tracking-wider block mb-4 font-semibold">
                   Security Profile
                 </span>
@@ -162,7 +167,7 @@ export default function AnalyzePage() {
                   {data.company}
                 </h2>
                 
-                <div className="space-y-8 pt-10 border-t border-border/6">
+                <div className="space-y-6 pt-8 border-t border-border/6">
                   <div>
                     <span className="text-[14px] text-muted-text block mb-3">Risk classification</span>
                     <span className={`text-[18px] font-semibold uppercase ${
@@ -175,7 +180,7 @@ export default function AnalyzePage() {
                   <div>
                     <span className="text-[14px] text-muted-text block mb-3">Ingestion status</span>
                     <span className="text-[18px] font-semibold text-primary-text flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-success" />
+                      <CheckCircle2 className="w-4 h-4 text-success" />
                       Completed
                     </span>
                   </div>
@@ -190,7 +195,7 @@ export default function AnalyzePage() {
             </Card>
 
             <Card>
-              <CardContent className="p-10 text-[16px] text-secondary-text leading-relaxed">
+              <CardContent className="px-4 py-3 text-[16px] text-secondary-text leading-relaxed">
                 <span className="text-[14px] text-muted-text uppercase tracking-wider block mb-5 font-semibold">
                   Methodology note
                 </span>
@@ -200,23 +205,23 @@ export default function AnalyzePage() {
           </div>
 
           {/* Center Column: Metrics & Risk Disclosures */}
-          <div className="lg:col-span-6 flex flex-col gap-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="lg:col-span-6 flex flex-col gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card>
-                <CardHeader>
+                <CardHeader className="px-4 py-3">
                   <CardTitle className="text-[24px]">Altman Z-Score</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-4 py-3">
                   <div className="text-[48px] font-bold text-primary-text leading-none">{data.altman_z?.toFixed(2) || 'N/A'}</div>
                   <p className="text-[16px] text-secondary-text mt-4">Solvency indicator</p>
                 </CardContent>
               </Card>
 
               <Card>
-                <CardHeader>
+                <CardHeader className="px-4 py-3">
                   <CardTitle className="text-[24px]">Piotroski F-Score</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-4 py-3">
                   <div className="text-[48px] font-bold text-primary-text leading-none">{data.piotroski_f || 'N/A'}</div>
                   <p className="text-[16px] text-secondary-text mt-4">Financial strength</p>
                 </CardContent>
@@ -225,24 +230,24 @@ export default function AnalyzePage() {
 
             {/* Financial Health Panel */}
             <Card>
-              <CardHeader>
+              <CardHeader className="px-4 py-3">
                 <CardTitle className="text-[24px]">Financial Health</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-5">
-                  <div className="flex justify-between py-4 border-b border-border/6">
+              <CardContent className="px-4 py-3">
+                <div className="space-y-4">
+                  <div className="flex justify-between py-3 border-b border-border/6">
                     <span className="text-[16px] text-secondary-text">Revenue</span>
                     <span className="text-[16px] text-primary-text font-medium">${data.revenue?.toLocaleString() || 'N/A'}</span>
                   </div>
-                  <div className="flex justify-between py-4 border-b border-border/6">
+                  <div className="flex justify-between py-3 border-b border-border/6">
                     <span className="text-[16px] text-secondary-text">Net Income</span>
                     <span className="text-[16px] text-primary-text font-medium">${data.net_income?.toLocaleString() || 'N/A'}</span>
                   </div>
-                  <div className="flex justify-between py-4 border-b border-border/6">
+                  <div className="flex justify-between py-3 border-b border-border/6">
                     <span className="text-[16px] text-secondary-text">Gross Margin</span>
                     <span className="text-[16px] text-primary-text font-medium">{data.gross_margin?.toFixed(1) || 'N/A'}%</span>
                   </div>
-                  <div className="flex justify-between py-4">
+                  <div className="flex justify-between py-3">
                     <span className="text-[16px] text-secondary-text">Current Ratio</span>
                     <span className="text-[16px] text-primary-text font-medium">{data.current_ratio?.toFixed(2) || 'N/A'}</span>
                   </div>
@@ -264,8 +269,8 @@ export default function AnalyzePage() {
               <div className="flex flex-col gap-8">
                 {data.identified_risks && data.identified_risks.length > 0 ? (
                   data.identified_risks.map((item: RiskItem, idx: number) => (
-                    <Card key={idx}>
-                      <CardContent className="p-8">
+                      <Card key={idx}>
+                        <CardContent className="px-4 py-3">
                         <div className="flex items-start justify-between mb-4">
                           <Badge 
                             variant={item.severity === 'High' ? 'destructive' : item.severity === 'Medium' ? 'warning' : 'success'}
@@ -281,8 +286,8 @@ export default function AnalyzePage() {
                     </Card>
                   ))
                 ) : (
-                  <Card className="bg-surface">
-                    <CardContent className="p-10 text-center text-[16px] text-secondary-text">
+                    <Card className="bg-surface">
+                    <CardContent className="px-4 py-3 text-center text-[16px] text-secondary-text">
                       No explicit high/medium risk items retrieved for this company.
                     </CardContent>
                   </Card>
@@ -292,13 +297,13 @@ export default function AnalyzePage() {
           </div>
 
           {/* Right Column: Recommendation Panels */}
-          <div className="lg:col-span-3 flex flex-col gap-12">
+          <div className="lg:col-span-3 flex flex-col gap-10">
             {/* Rule Engine Output */}
             <Card>
-              <CardHeader>
+              <CardHeader className="px-4 py-3">
                 <CardTitle className="text-[24px]">Rule Engine Output</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-4 py-3">
                 <div className="space-y-6">
                   <div>
                     <span className="text-[14px] text-muted-text block mb-2">Recommendation</span>
@@ -325,10 +330,10 @@ export default function AnalyzePage() {
 
             {/* ML Prediction */}
             <Card>
-              <CardHeader>
+              <CardHeader className="px-4 py-3">
                 <CardTitle className="text-[24px]">ML Prediction</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-4 py-3">
                 <div className="space-y-6">
                   <div>
                     <span className="text-[14px] text-muted-text block mb-2">Recommendation</span>
@@ -372,21 +377,21 @@ export default function AnalyzePage() {
 
             {/* Audit Recommendation */}
             <Card>
-              <CardHeader>
+              <CardHeader className="px-4 py-3">
                 <CardTitle className="text-[24px]">Audit Recommendation</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="flex flex-col gap-5">
+              <CardContent className="px-4 py-3">
+                <div className="flex flex-col gap-6">
                   {['BUY', 'HOLD', 'AVOID'].map((rec) => (
                     <div 
                       key={rec}
-                      className={`p-6 rounded-xl transition-all border ${
+                      className={`px-4 py-3 rounded-xl transition-all border ${
                         activeRec === rec
                           ? `bg-${rec === 'BUY' ? 'success' : rec === 'HOLD' ? 'warning' : 'danger'}/10 border-${rec === 'BUY' ? 'success' : rec === 'HOLD' ? 'warning' : 'danger'} text-${rec === 'BUY' ? 'success' : rec === 'HOLD' ? 'warning' : 'danger'}`
                           : 'bg-background/50 border-border/6 text-muted-text opacity-60'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center justify-between mb-3 gap-3">
                         <span className="text-[18px] font-bold">{rec}</span>
                         {activeRec === rec && (
                           <div className="w-3 h-3 rounded-full bg-current animate-pulse" />

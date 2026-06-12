@@ -87,11 +87,11 @@ export default function ReportPage() {
   }
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-12">
       {/* Title */}
-      <div className="pb-12 flex items-center gap-5 border-b border-border/6">
-        <div className="p-4 rounded-xl bg-surface border border-border/6">
-          <FileText className="w-6 h-6 text-gold-accent" />
+      <div className="pb-10 flex items-center gap-5 border-b border-border/6">
+        <div className="p-5 rounded-xl bg-surface border border-border/6">
+          <FileText className="w-5 h-5 text-gold-accent" />
         </div>
         <div>
           <h1 className="text-[42px] font-bold text-primary-text tracking-tight uppercase leading-tight">
@@ -104,12 +104,12 @@ export default function ReportPage() {
       </div>
 
       {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 items-start">
         {/* Selector Sidepanel */}
-        <div className="flex flex-col gap-12">
-          <Card>
-            <CardContent className="p-10 flex flex-col gap-4">
-              <span className="text-[14px] text-muted-text block mb-5 px-1 font-semibold">
+        <div className="flex flex-col gap-8">
+            <Card>
+              <CardContent className="px-6 py-5 flex flex-col gap-4">
+              <span className="text-[14px] text-muted-text block mb-5 font-semibold">
                 Select report scope
               </span>
 
@@ -118,7 +118,7 @@ export default function ReportPage() {
                   setActiveTab('committee')
                   setError(null)
                 }}
-                className={`w-full flex items-center gap-4 px-6 py-4 rounded-xl text-left text-[16px] border transition-all ${
+                className={`w-full flex items-center gap-4 px-6 py-3 rounded-xl text-left text-[16px] border transition-all ${
                   activeTab === 'committee'
                     ? 'bg-gold-accent/10 border-gold-accent/20 text-gold-accent font-semibold shadow-sm'
                     : 'border-transparent text-secondary-text hover:text-primary-text hover:bg-surface/50'
@@ -133,7 +133,7 @@ export default function ReportPage() {
                   setActiveTab('company')
                   setError(null)
                 }}
-                className={`w-full flex items-center gap-4 px-6 py-4 rounded-xl text-left text-[16px] border transition-all ${
+                className={`w-full flex items-center gap-4 px-6 py-3 rounded-xl text-left text-[16px] border transition-all ${
                   activeTab === 'company'
                     ? 'bg-gold-accent/10 border-gold-accent/20 text-gold-accent font-semibold shadow-sm'
                     : 'border-transparent text-secondary-text hover:text-primary-text hover:bg-surface/50'
@@ -147,8 +147,8 @@ export default function ReportPage() {
 
           {activeTab === 'company' && (
             <Card>
-              <CardContent className="p-10">
-                <span className="text-[14px] text-muted-text block mb-5 px-1 font-semibold">
+              <CardContent className="px-4 py-3">
+                <span className="text-[14px] text-muted-text block mb-5 font-semibold">
                   Configure audit target
                 </span>
                 <form onSubmit={handleCompanySubmit} className="flex flex-col gap-6">
@@ -160,7 +160,7 @@ export default function ReportPage() {
                   />
                   <button
                     type="submit"
-                    className="h-[52px] w-full bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 text-[16px]"
+                    className="h-[44px] w-full bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 text-[16px]"
                   >
                     <Search className="w-5 h-5" />
                     Generate report
@@ -173,7 +173,7 @@ export default function ReportPage() {
           {reportData && (
             <button
               onClick={handleDownload}
-              className="h-[52px] w-full bg-surface hover:bg-elevated border border-border/6 text-primary-text font-semibold rounded-xl transition-colors flex items-center justify-center gap-3 shadow-sm text-[16px]"
+              className="h-[44px] w-full bg-surface hover:bg-elevated border border-border/6 text-primary-text font-semibold rounded-xl transition-colors flex items-center justify-center gap-3 shadow-sm text-[16px]"
             >
               <Download className="w-5 h-5 text-gold-accent" />
               Export report text
@@ -187,7 +187,7 @@ export default function ReportPage() {
 
           {error && (
             <Card className="bg-surface">
-              <CardContent className="p-10">
+              <CardContent className="px-4 py-3">
                 <div className="flex items-start gap-8 mb-8">
                   <AlertCircle className="w-8 h-8 text-danger shrink-0 mt-1" />
                   <div>
@@ -211,7 +211,7 @@ export default function ReportPage() {
 
           {!loading && !error && !reportData && (
             <Card className="bg-surface">
-              <CardContent className="p-24 text-center text-[16px] text-secondary-text min-h-[450px] flex flex-col items-center justify-center">
+              <CardContent className="px-4 py-3 text-center text-[16px] text-secondary-text min-h-[420px] flex flex-col items-center justify-center">
                 <ShieldAlert className="w-20 h-20 text-muted-text mb-8" />
                 <span>Configure a company above to build and display an individual audit report.</span>
               </CardContent>
@@ -221,7 +221,7 @@ export default function ReportPage() {
           {!loading && !error && reportData && (
             <Card className="overflow-hidden shadow-2xl">
               {/* Document Header block - Notion Dark Mode styled */}
-              <div className="px-16 pt-16 pb-12 flex flex-col gap-5 bg-elevated">
+              <div className="px-14 pt-14 pb-10 flex flex-col gap-5 bg-elevated">
                 <div className="flex items-center justify-between border-b border-border/6 pb-6">
                   <Badge variant="gold" className="text-[14px] tracking-wider uppercase font-bold">
                     Investment Research Dossier
@@ -243,14 +243,14 @@ export default function ReportPage() {
               </div>
 
               {/* Document Content - Styled in Geist light-gray with Gold accents for headings */}
-              <div className="px-16 py-16 max-h-[600px] overflow-y-auto border-t border-b border-border/6 bg-surface">
+              <div className="px-14 py-14 max-h-[600px] overflow-y-auto border-t border-b border-border/6 bg-surface">
                 <pre className="whitespace-pre-wrap select-text font-normal text-[18px] text-primary-text leading-[1.8]">
                   {reportData.content}
                 </pre>
               </div>
               
               {/* Document Footer block */}
-              <div className="px-16 py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[14px] text-muted-text bg-elevated">
+              <div className="px-14 py-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[14px] text-muted-text bg-elevated">
                 <span>Portfolio compliance notes: Solvency metrics verified</span>
                 <span>Lines: {reportData.content?.split('\n').length || 0}</span>
               </div>

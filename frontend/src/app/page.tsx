@@ -48,43 +48,43 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-8">
       {/* Hero Section */}
       <div className="max-w-6xl">
-        <h1 className="text-[72px] md:text-[80px] font-bold leading-tight tracking-tight text-primary-text mb-12">
+        <h1 className="text-[46px] md:text-[54px] font-bold leading-tight tracking-tight text-primary-text mb-6">
           Decision Intelligence
           <br />
           <span className="text-gold-accent">for Public Markets</span>
         </h1>
-        <p className="text-[18px] text-secondary-text leading-relaxed max-w-3xl mb-12">
+        <p className="text-[17px] text-secondary-text leading-relaxed max-w-3xl mb-6">
           Transform SEC filings, financial statements, risk disclosures, and machine learning signals into investment-grade decisions.
         </p>
 
         {/* Metric Cards */}
-        <div className="flex flex-wrap gap-6 mt-8">
-          <Badge variant="outline" className="px-6 py-3 text-[14px] border-border/6 bg-surface">
+        <div className="flex flex-wrap gap-6 mt-6">
+          <Badge variant="outline" className="text-[14px] border-border/6 bg-surface">
             43 Companies Indexed
           </Badge>
-          <Badge variant="outline" className="px-6 py-3 text-[14px] border-border/6 bg-surface">
+          <Badge variant="outline" className="text-[14px] border-border/6 bg-surface">
             55 SEC Filings Parsed
           </Badge>
-          <Badge variant="gold" className="px-6 py-3 text-[14px]">
+          <Badge variant="gold" className="text-[14px]">
             Multi-Agent Pipeline
           </Badge>
-          <Badge variant="gold" className="px-6 py-3 text-[14px]">
+          <Badge variant="gold" className="text-[14px]">
             XGBoost Model Active
           </Badge>
         </div>
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Search Console */}
-        <div className="lg:col-span-2 flex flex-col gap-12">
+        <div className="lg:col-span-2 flex flex-col gap-4">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-[24px]">
-                <Search className="w-6 h-6 text-gold-accent" />
+                <Search className="w-5 h-5 text-gold-accent" />
                 Asset Analysis Console
               </CardTitle>
             </CardHeader>
@@ -99,10 +99,10 @@ export default function Dashboard() {
                 />
                 <button
                   type="submit"
-                  className="h-[52px] px-10 bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 text-[16px]"
+                  className="h-[44px] px-6 bg-gold-accent hover:bg-gold-accent/90 text-background font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 text-[16px]"
                 >
                   Analyze Asset
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
               <p className="text-[14px] text-muted-text mt-8 leading-relaxed">
@@ -112,11 +112,11 @@ export default function Dashboard() {
           </Card>
 
           {/* System Indicators */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
-              <CardContent className="p-10 flex flex-col items-center justify-center gap-5 min-h-[160px]">
-                <div className="p-5 bg-elevated rounded-xl border border-border/6">
-                  <Database className="w-6 h-6 text-secondary-text" />
+              <CardContent className="px-4 py-3 flex flex-col items-center justify-center gap-4 min-h-[136px]">
+                <div className="p-4 bg-elevated rounded-xl border border-border/6">
+                  <Database className="w-5 h-5 text-secondary-text" />
                 </div>
                 <div className="text-center">
                   <span className="text-[14px] text-muted-text block font-medium mb-2">Data Ingestion</span>
@@ -126,9 +126,9 @@ export default function Dashboard() {
             </Card>
 
             <Card>
-              <CardContent className="p-10 flex flex-col items-center justify-center gap-5 min-h-[160px]">
-                <div className="p-5 bg-elevated rounded-xl border border-border/6">
-                  <TrendingUp className="w-6 h-6 text-gold-accent" />
+              <CardContent className="px-4 py-3 flex flex-col items-center justify-center gap-6 min-h-[160px]">
+                  <div className="p-5 bg-elevated rounded-xl border border-border/6">
+                  <TrendingUp className="w-5 h-5 text-gold-accent" />
                 </div>
                 <div className="text-center">
                   <span className="text-[14px] text-muted-text block font-medium mb-2">Predictive Model</span>
@@ -138,9 +138,9 @@ export default function Dashboard() {
             </Card>
 
             <Card>
-              <CardContent className="p-10 flex flex-col items-center justify-center gap-5 min-h-[160px]">
-                <div className="p-5 bg-elevated rounded-xl border border-border/6">
-                  <Scale className="w-6 h-6 text-secondary-text" />
+              <CardContent className="px-4 py-3 flex flex-col items-center justify-center gap-6 min-h-[160px]">
+                  <div className="p-5 bg-elevated rounded-xl border border-border/6">
+                  <Scale className="w-5 h-5 text-secondary-text" />
                 </div>
                 <div className="text-center">
                   <span className="text-[14px] text-muted-text block font-medium mb-2">Decision Engine</span>
@@ -156,27 +156,27 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="text-[24px]">Research Index</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4 text-[16px] text-primary-text">
-              <div className="flex justify-between py-5 border-b border-border/6">
+          <CardContent className="px-4 py-3">
+            <div className="space-y-3 text-[15px] text-primary-text">
+              <div className="flex justify-between py-4 border-b border-border/6">
                 <span className="text-secondary-text">Research database</span>
                 <span>SEC filings index</span>
               </div>
-              <div className="flex justify-between py-5 border-b border-border/6">
+              <div className="flex justify-between py-4 border-b border-border/6">
                 <span className="text-secondary-text">Intelligence layer</span>
                 <span>Dense embeddings</span>
               </div>
-              <div className="flex justify-between py-5 border-b border-border/6">
+              <div className="flex justify-between py-4 border-b border-border/6">
                 <span className="text-secondary-text">Reasoning model</span>
                 <span>Gemini 1.5 Pro</span>
               </div>
-              <div className="flex justify-between py-5">
+              <div className="flex justify-between py-4">
                 <span className="text-secondary-text">Last sync</span>
                 <span>Just now</span>
               </div>
             </div>
 
-            <div className="mt-10 pt-10 border-t border-border/6">
+            <div className="mt-8 pt-8 border-t border-border/6">
               <span className="text-[14px] text-secondary-text block mb-4 font-semibold">
                 Research Note
               </span>
@@ -191,7 +191,7 @@ export default function Dashboard() {
       {/* Recently Analyzed */}
       <div>
         <div className="flex items-center gap-3 mb-12">
-          <History className="w-6 h-6 text-gold-accent" />
+          <History className="w-5 h-5 text-gold-accent" />
           <h2 className="text-[32px] font-semibold text-primary-text leading-tight">
             Recently Analyzed Securities
           </h2>
@@ -199,10 +199,10 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {recentCompanies.map((c, idx) => (
             <Card key={idx}>
-              <CardContent className="p-10">
-                <h3 className="text-[20px] font-semibold text-primary-text mb-8">{c.company}</h3>
-                <div className="space-y-5">
-                  <div className="flex justify-between">
+              <CardContent className="px-4 py-3">
+                <h3 className="text-[22px] font-semibold text-primary-text mb-6">{c.company}</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-4">
                     <span className="text-[14px] text-secondary-text">Recommendation</span>
                     <Badge 
                       variant={c.recommendation === 'BUY' ? 'success' : c.recommendation === 'AVOID' ? 'destructive' : 'warning'}
