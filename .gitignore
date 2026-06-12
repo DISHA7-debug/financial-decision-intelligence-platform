@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env
+
+# Mac
+.DS_Store
+
+# Cache
+data/cache/
+
+# SEC downloads
+data/sec_filings/
+
+# Generated reports
+reports/
+
+# Datasets
+data/datasets/
+
+# Models
+models/
+
+# FAISS
+indexing/faiss_index/
+indexing/embeddings/
+indexing/chunks/
+indexing/metadata/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
