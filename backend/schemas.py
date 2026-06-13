@@ -22,6 +22,10 @@ class AnalyzeResponse(BaseModel):
     confidence: str
     altman_z: float | None = None
     piotroski_f: int | None = None
+    revenue: float | None = None
+    net_income: float | None = None
+    gross_margin: float | None = None
+    current_ratio: float | None = None
     risk_classification: str | None = None
     identified_risks: list[RiskItem] = Field(default_factory=list)
     ml_recommendation: str | None = None
@@ -39,6 +43,8 @@ class CompareRequest(BaseModel):
 class RankingItem(BaseModel):
     rank: int
     company: str
+    revenue: float | None = None
+    growth: float | None = None
     recommendation: str | None = None
     ml_recommendation: str | None = None
     altman_z: float | None = None

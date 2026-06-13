@@ -37,6 +37,10 @@ def test_analyze_success(mock_analyze):
         confidence="HIGH",
         altman_z=8.57,
         piotroski_f=7,
+        revenue=416161.0,
+        net_income=112010.0,
+        gross_margin=0.27,
+        current_ratio=1.23,
         risk_classification="Safe Zone",
         identified_risks=[
             RiskItem(
@@ -62,6 +66,10 @@ def test_analyze_success(mock_analyze):
     assert payload["confidence"] == "HIGH"
     assert payload["altman_z"] == 8.57
     assert payload["piotroski_f"] == 7
+    assert payload["revenue"] == 416161.0
+    assert payload["net_income"] == 112010.0
+    assert payload["gross_margin"] == 0.27
+    assert payload["current_ratio"] == 1.23
     assert len(payload["identified_risks"]) == 1
 
 

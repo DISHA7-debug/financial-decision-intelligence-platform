@@ -64,6 +64,14 @@ def validate_company(company: str) -> str:
     return company.strip()
 
 
+def _safe_ratio(numerator: float | None, denominator: float | None) -> float | None:
+    if numerator is None or denominator is None:
+        return None
+    if denominator == 0:
+        return None
+    return numerator / denominator
+
+
 def analyze_company(company: str) -> AnalyzeResponse:
     validate_company(company)
 
@@ -91,6 +99,19 @@ def analyze_company(company: str) -> AnalyzeResponse:
     identified = extract_identified_risks(
         state.retrieved_context
     )
+    financials = state.financial_data
+    current = financials.current_year if financials else None
+
+    revenue = current.revenue if current else None
+    net_income = current.net_income if current else None
+    gross_margin = _safe_ratio(
+        current.gross_profit if current else None,
+        revenue,
+    )
+    current_ratio = _safe_ratio(
+        current.current_assets if current else None,
+        current.current_liabilities if current else None,
+    )
 
     return AnalyzeResponse(
         company=company,
@@ -106,6 +127,10 @@ def analyze_company(company: str) -> AnalyzeResponse:
         piotroski_f=(
             risk.piotroski_f_score if risk else None
         ),
+        revenue=revenue,
+        net_income=net_income,
+        gross_margin=gross_margin,
+        current_ratio=current_ratio,
         risk_classification=(
             risk.risk_classification if risk else None
         ),
@@ -133,6 +158,8 @@ def compare_companies_api(
         RankingItem(
             rank=row.rank or 0,
             company=row.company,
+            revenue=row.revenue,
+            growth=row.revenue_growth,
             recommendation=row.rule_recommendation,
             ml_recommendation=row.ml_recommendation,
             altman_z=row.altman_z,
