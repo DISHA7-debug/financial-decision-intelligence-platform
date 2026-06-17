@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Search, AlertTriangle, ArrowLeft, BarChart2, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import type { AnalysisResult, RiskItem } from '@/types'
 
-export default function AnalyzePage() {
+function AnalyzePageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const companyParam = searchParams.get('company')
@@ -412,5 +412,18 @@ export default function AnalyzePage() {
         </div>
       )}
     </div>
+  )
+}
+export default function AnalyzePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner message="Loading analysis workspace..." />
+        </div>
+      }
+    >
+      <AnalyzePageContent />
+    </Suspense>
   )
 }
