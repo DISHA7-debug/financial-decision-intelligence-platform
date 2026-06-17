@@ -14,7 +14,7 @@ venv/
 # Cache
 data/cache/
 
-# SEC downloads
+# SEC downloads (1.3GB - regenerate automatically)
 data/sec_filings/
 
 # Generated reports
@@ -26,11 +26,9 @@ data/datasets/
 # Models
 models/
 
-# FAISS
-
+# FAISS generated embeddings/chunks
 indexing/embeddings/
 indexing/chunks/
-indexing/metadata/
 
 # IDE
 .vscode/
@@ -38,3 +36,10 @@ indexing/metadata/
 
 # Logs
 *.log
+
+# Frontend build artifacts
+frontend/.next/
+frontend/node_modules/
+
+# Test cache
+.pytest_cache/
