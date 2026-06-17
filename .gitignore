@@ -27,7 +27,7 @@ data/datasets/
 models/
 
 # FAISS
-indexing/faiss_index/
+
 indexing/embeddings/
 indexing/chunks/
 indexing/metadata/
