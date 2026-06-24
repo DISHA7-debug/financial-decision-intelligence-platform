@@ -46,6 +46,12 @@ def _write_cache(
     cache_file: str,
     financial_data: FinancialData
 ) -> None:
+
+    os.makedirs(
+        os.path.dirname(cache_file),
+        exist_ok=True
+    )
+
     with open(
         cache_file,
         "w"
