@@ -2,6 +2,8 @@ import os
 import sys
 from pathlib import Path
 
+from rich import traceback
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
@@ -75,15 +77,23 @@ def _safe_ratio(numerator: float | None, denominator: float | None) -> float | N
 def analyze_company(company: str) -> AnalyzeResponse:
     validate_company(company)
 
+    import traceback
+
     try:
         state = run_workflow(company)
+
     except Exception as error:
+        print("\n========== WORKFLOW TRACEBACK ==========\n")
+        traceback.print_exc()
+        print("\n========================================\n")
+
         raise WorkflowError(
             f"Workflow failed for {company}: {error}"
         ) from error
 
     try:
         ml_prediction = predict_recommendation(state)
+
     except Exception as error:
         raise ModelLoadError(
             f"ML prediction failed for {company}: {error}"
@@ -104,10 +114,12 @@ def analyze_company(company: str) -> AnalyzeResponse:
 
     revenue = current.revenue if current else None
     net_income = current.net_income if current else None
+
     gross_margin = _safe_ratio(
         current.gross_profit if current else None,
         revenue,
     )
+
     current_ratio = _safe_ratio(
         current.current_assets if current else None,
         current.current_liabilities if current else None,
@@ -135,7 +147,8 @@ def analyze_company(company: str) -> AnalyzeResponse:
             risk.risk_classification if risk else None
         ),
         identified_risks=[
-            RiskItem(**item) for item in identified
+            RiskItem(**item)
+            for item in identified
         ],
         ml_recommendation=ml_prediction.recommendation,
         ml_confidence=ml_prediction.confidence,
