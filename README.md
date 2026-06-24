@@ -1,75 +1,225 @@
 # Financial Decision Intelligence Platform
 
-An AI-powered platform that analyzes SEC filings, extracts financial intelligence, identifies business risks, generates investment recommendations, and compares multiple companies.
+> AI-powered multi-agent financial due diligence system that transforms SEC filings into structured investment intelligence.
 
-## Features
+🌐 **Live Demo:** https://financial-decision-intelligence-pla.vercel.app/
 
-- SEC 10-K ingestion
-- XBRL financial extraction
-- Altman Z-Score analysis
-- Piotroski F-Score analysis
-- SEC risk retrieval
-- Risk intelligence categorization
-- Rule-based recommendations
-- XGBoost predictions
-- Due diligence reports
-- Investment committee reports
-- **FastAPI REST API** for frontend integration
+---
 
-## Tech Stack
+## Overview
 
-- Python
-- FastAPI + Uvicorn
-- FAISS
-- Sentence Transformers
-- XGBoost
-- Gemini
-- SEC EDGAR
+Financial analysts spend hours reviewing SEC filings, financial statements, risk disclosures, and company reports before making investment decisions.
 
-## Setup
+The Financial Decision Intelligence Platform automates large parts of this workflow by combining retrieval systems, financial analytics, machine learning, and agent-based decision pipelines.
 
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+Instead of manually processing hundreds of pages of disclosures, users can generate structured company analyses, compare investment opportunities, identify risks, and produce committee-ready reports in seconds.
+
+---
+
+## Key Features
+
+### SEC Filing Intelligence
+
+* Automated SEC 10-K filing retrieval
+* Regulatory disclosure processing
+* Financial statement extraction
+* Structured financial data generation
+
+### Financial Analysis
+
+* Revenue and profitability analysis
+* Liquidity assessment
+* Solvency evaluation
+* Asset utilization metrics
+* Growth trend analysis
+
+### Risk Intelligence
+
+* Altman Z-Score calculation
+* Piotroski F-Score evaluation
+* Semantic risk retrieval
+* Disclosure-based risk identification
+* Risk classification engine
+
+### Investment Decision Engine
+
+* Rule-based investment recommendations
+* XGBoost-powered prediction model
+* Confidence scoring
+* Buy / Hold / Avoid classification
+
+### Portfolio Comparison
+
+* Multi-company analysis
+* Side-by-side comparisons
+* Ranking engine
+* Investment committee support
+
+### Report Generation
+
+* Company due diligence reports
+* Investment committee reports
+* Structured decision summaries
+* AI-assisted investment memos
+
+---
+
+# System Architecture
+
+The platform follows a multi-stage agentic workflow where each component specializes in a specific financial analysis task.
+
+```text
+SEC Filing Agent
+        │
+        ▼
+Financial Extraction Agent
+        │
+        ▼
+Risk Intelligence Agent
+        │
+        ▼
+Investment Decision Agent
+        │
+        ▼
+Report Generation Agent
 ```
 
-## CLI Usage
+### Agent Responsibilities
 
-```bash
-python workflow.py Apple
-python report_generator.py Apple
-python compare_report.py Apple Microsoft Nvidia Tesla Amazon
+#### SEC Filing Agent
+
+Responsible for:
+
+* Retrieving SEC filings
+* Managing filing ingestion
+* Processing raw regulatory disclosures
+
+#### Financial Extraction Agent
+
+Responsible for:
+
+* Parsing financial statements
+* Extracting structured metrics
+* Building financial datasets
+
+#### Risk Intelligence Agent
+
+Responsible for:
+
+* Risk scoring
+* Financial health assessment
+* Semantic retrieval of disclosures
+
+#### Investment Decision Agent
+
+Responsible for:
+
+* Recommendation generation
+* Confidence scoring
+* Investment classification
+
+#### Report Generation Agent
+
+Responsible for:
+
+* Due diligence reports
+* Committee-ready summaries
+* Decision explanations
+
+---
+
+# Technology Stack
+
+## Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+
+## Backend
+
+* FastAPI
+* Python
+
+## AI & Machine Learning
+
+* Gemini
+* Sentence Transformers
+* FAISS
+* XGBoost
+
+## Financial Data
+
+* SEC EDGAR
+* XBRL Processing
+
+## Deployment
+
+* Vercel
+* Railway
+
+---
+
+# Workflow
+
+```text
+User Request
+      │
+      ▼
+SEC Filing Retrieval
+      │
+      ▼
+Financial Extraction
+      │
+      ▼
+Risk Analysis
+      │
+      ▼
+Semantic Retrieval
+      │
+      ▼
+Investment Recommendation
+      │
+      ▼
+Report Generation
 ```
 
-## API Server
+---
 
-Start the API from the project root:
+# Example Use Cases
 
-```bash
-source venv/bin/activate
-uvicorn backend.api:app --reload
+### Company Analysis
+
+Analyze a single company and receive:
+
+* Financial metrics
+* Risk assessment
+* Investment recommendation
+* AI-generated explanation
+
+### Portfolio Comparison
+
+Compare multiple companies and receive:
+
+* Relative rankings
+* Financial comparison
+* Investment committee insights
+
+### Due Diligence
+
+Generate structured investment reports directly from SEC filings.
+
+---
+
+# API Endpoints
+
+## Analyze Company
+
+```http
+POST /analyze
 ```
-
-Open Swagger UI:
-
-http://127.0.0.1:8000/docs
-
-Health check:
-
-http://127.0.0.1:8000/health
-
-## API Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/health` | Service health check |
-| POST | `/analyze` | Run full due diligence on one company |
-| POST | `/compare` | Compare and rank multiple companies |
-| GET | `/report/{company}` | Return due diligence report text |
-| GET | `/committee-report` | Return latest investment committee report |
-
-### POST `/analyze`
 
 Request:
 
@@ -79,102 +229,126 @@ Request:
 }
 ```
 
-Response:
+---
 
-```json
-{
-  "company": "Apple",
-  "recommendation": "BUY",
-  "confidence": "HIGH",
-  "altman_z": 8.57,
-  "piotroski_f": 7,
-  "risk_classification": "Safe Zone",
-  "identified_risks": [
-    {
-      "risk": "Cybersecurity Risk",
-      "severity": "MEDIUM",
-      "summary": "...",
-      "evidence": "..."
-    }
-  ],
-  "ml_recommendation": "BUY",
-  "ml_confidence": "HIGH"
-}
+## Compare Companies
+
+```http
+POST /compare
 ```
-
-### POST `/compare`
 
 Request:
 
 ```json
 {
-  "companies": ["Apple", "Microsoft", "Nvidia"]
-}
-```
-
-Response:
-
-```json
-{
-  "ranking": [
-    {
-      "rank": 1,
-      "company": "Apple",
-      "recommendation": "BUY",
-      "ml_recommendation": "BUY",
-      "altman_z": 8.57,
-      "piotroski_f": 7,
-      "risk_classification": "Safe Zone"
-    }
-  ],
-  "comparison": [
-    {
-      "company": "Apple",
-      "revenue": 416161.0,
-      "revenue_growth": 0.064,
-      "net_income": 112010.0,
-      "current_ratio": 0.89,
-      "debt_ratio": 0.795,
-      "altman_z": 8.57,
-      "piotroski_f": 7,
-      "risk_classification": "Safe Zone",
-      "rule_recommendation": "BUY",
-      "ml_recommendation": "BUY",
-      "rank": 1
-    }
+  "companies": [
+    "Apple",
+    "Microsoft",
+    "NVIDIA"
   ]
 }
 ```
 
-### Example curl commands
+---
 
-```bash
-curl http://127.0.0.1:8000/health
+## Generate Company Report
 
-curl -X POST http://127.0.0.1:8000/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"company": "Apple"}'
-
-curl -X POST http://127.0.0.1:8000/compare \
-  -H "Content-Type: application/json" \
-  -d '{"companies": ["Apple", "Microsoft", "Nvidia"]}'
-
-curl http://127.0.0.1:8000/report/Apple
-
-curl http://127.0.0.1:8000/committee-report
+```http
+GET /report/{company}
 ```
 
-## API Tests
+---
+
+## Health Check
+
+```http
+GET /health
+```
+
+---
+
+# Local Setup
+
+Clone the repository:
 
 ```bash
+git clone https://github.com/DISHA7-debug/financial-decision-intelligence-platform.git
+cd financial-decision-intelligence-platform
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv venv
 source venv/bin/activate
-python -m pytest backend/test_api.py -v
 ```
 
-## Error Responses
+Install dependencies:
 
-| Status | Meaning |
-|--------|---------|
-| 404 | Unknown company or missing report |
-| 500 | Workflow or unexpected server error |
-| 503 | XGBoost model loading failure |
+```bash
+pip install -r requirements.txt
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend:
+
+```bash
+uvicorn backend.api:app --reload
+```
+
+---
+
+# Environment Variables
+
+Backend:
+
+```env
+GEMINI_API_KEY=your_api_key
+```
+
+Frontend:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://financial-decision-intelligence-platform-production.up.railway.app
+```
+
+---
+
+# Future Improvements
+
+* Real-time market data integration
+* Multi-filing historical analysis
+* Earnings call intelligence
+* Multi-agent orchestration framework
+* Institutional portfolio optimization
+* Explainable AI recommendations
+* Advanced financial forecasting
+
+---
+
+# Project Highlights
+
+* Multi-Agent Financial Intelligence System
+* SEC Filing Retrieval & Processing
+* Financial Risk Analytics
+* Semantic Retrieval Pipeline
+* XGBoost Recommendation Engine
+* Automated Investment Research
+* Production Deployment on Railway & Vercel
+
+---
+
+## Live Demo
+
+🚀 https://financial-decision-intelligence-pla.vercel.app/
+
+---
+
+Built with a focus on Financial AI, Decision Intelligence, Retrieval Systems, and Agentic Workflows.
