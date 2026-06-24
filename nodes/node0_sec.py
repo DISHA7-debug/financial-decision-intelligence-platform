@@ -92,19 +92,28 @@ def run_sec_ingestion(
     return filing_text
 
 
-def run_sec_raw_ingestion(
-    company_name: str
-) -> str:
+def run_sec_raw_ingestion(company_name: str) -> str:
 
-    ticker = resolve_ticker(
-        company_name
-    )
+    ticker = resolve_ticker(company_name)
 
     base_path = (
         f"data/sec_filings/"
         f"sec-edgar-filings/"
         f"{ticker}/10-K"
     )
+
+    if not os.path.exists(base_path):
+
+        print(
+            f"\nDownloading filing for {ticker}...\n"
+        )
+
+        download_latest_10k(ticker)
+
+    if not os.path.exists(base_path):
+        raise FileNotFoundError(
+            f"SEC filing download failed for {ticker}"
+        )
 
     folders = sorted(
         os.listdir(base_path)
