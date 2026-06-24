@@ -65,6 +65,12 @@ def run_sec_ingestion(
             ticker
         )
 
+        # recompute path after download
+        if not os.path.exists(base_path):
+            raise FileNotFoundError(
+                f"SEC filing download failed for {ticker}"
+            )
+
     folders = sorted(
         os.listdir(base_path)
     )

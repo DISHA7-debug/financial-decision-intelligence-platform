@@ -5,6 +5,8 @@ def download_latest_10k(
     ticker: str
 ):
 
+    print(f"Starting SEC download for {ticker}")
+
     dl = Downloader(
         "FinancialDueDiligenceAgent",
         "dishaworks07@gmail.com",
@@ -17,6 +19,4 @@ def download_latest_10k(
         limit=1
     )
 
-    print(
-        f"Downloaded latest 10-K for {ticker}"
-    )
+    print(f"Finished SEC download for {ticker}")
