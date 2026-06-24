@@ -24,7 +24,7 @@ reports/
 data/datasets/
 
 # Models
-models/
+#models/
 
 # FAISS generated embeddings/chunks
 indexing/embeddings/
